@@ -14,7 +14,11 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-############################################################################
+echo "############################################################################"
+echo ""
+echo "                    Calistra script                                         "
+echo ""
+echo "############################################################################"
 
 # Variables
 SOURCE_DIR=$(pwd)
@@ -24,7 +28,7 @@ WORK_DIR=$SOURCE_DIR/work_dir
 
 # Please uncomment the java version that's designed for your system
 # Linux x64
-JAVA_ARC_URL=https://github.com/adoptium/temurin17-binaries/releases/download/jdk-17.0.6%2B10/OpenJDK17U-jdk_x64_linux_hotspot_17.0.6_10.tar.gz
+#JAVA_ARC_URL=https://github.com/adoptium/temurin17-binaries/releases/download/jdk-17.0.6%2B10/OpenJDK17U-jdk_x64_linux_hotspot_17.0.6_10.tar.gz
 
 # MacOs x64
 #JAVA_ARC_URL=https://github.com/adoptium/temurin17-binaries/releases/download/jdk-17.0.6%2B10/OpenJDK17U-jdk_x64_mac_hotspot_17.0.6_10.tar.gz
@@ -124,6 +128,11 @@ run_gradle() {
   cd - || exit 1
 }
 
+if [ -n "${JAVA_ARC_URL}" ]; then
+  echo "Please uncomment the JAVA_ARC_URL variable in the begging of the script"
+  exit 1
+fi
+
 # prepare working directory
 prepare_working_directory "$WORK_DIR"
 
@@ -141,7 +150,6 @@ fi
 extract_from_zip "$WORK_DIR" "$SPRING_FILE_ZIP"
 
 SPRING_DIR=$(find_spring_directory "$WORK_DIR")
-
 
 if [ -n "${SPING_DIR}" ]; then
   echo "Spring framework directory is not found"
