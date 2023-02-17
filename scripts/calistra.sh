@@ -19,6 +19,7 @@ echo ""
 echo "                    Calistra script                                         "
 echo ""
 echo "############################################################################"
+echo ""
 
 # Variables
 SOURCE_DIR=$(pwd)
@@ -125,7 +126,7 @@ run_gradle() {
   # For debug
   #  echo "Running command: [$CMD]"
   ${CMD} 2>/dev/null
-  cd - || exit 1
+  cd - 1>/dev/null || exit 1
 }
 
 if [ -n "${JAVA_ARC_URL}" ]; then
