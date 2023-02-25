@@ -7,7 +7,7 @@ Moreover, some of them are using special optimization for a CPU or for a platfor
 I want to see CPU performance on task that a lot of software developers are facing every day. For this reason I took
 one of the most popular programming language and one of the most popular framework for it - `Java` and `Spring Framework`.
 
-There are set of scripts for different OSs. Each script prepares all necessary environment (download JDK, Spring 
+There is a set of scripts for different OSs. Each script prepares all necessary environment (download JDK, Spring 
 Framework source code, Gradle, etc.) and runs compilation and tests execution tasks three times. At the end, the script
 prints results: time for each test and average execution time.
 
