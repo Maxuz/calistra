@@ -174,7 +174,7 @@ done
 echo ""
 echo "####################################################"
 echo ""
-echo "Test execution complete. Results for each iteration:"
+echo "Test execution is completed. Results for each iteration:"
 for i in "${!TEST_RESULT[@]}"; do
   echo "#$i: ${TEST_RESULT[$i]}ms"
 done
