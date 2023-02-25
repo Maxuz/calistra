@@ -1,9 +1,9 @@
 # Calistra
 
 ## Description
-I think that the vast majority CPU benchmarks doesn't show performance for real world tasks. 
+There are a lot of CPU benchmarks and I think that the vast majority of them do not show performance for real world tasks. 
 Moreover, some of them are using special optimization for a CPU or for a platform, what makes them unreliable,
-in the case you want to see a real boost if you get the tested CPU.
+in the case you want to see a real boost if you get the CPU.
 
 I want to see CPU performance on task that a lot of software developers are facing every day. For this reason I took
 one of the most popular programming language and one of the most popular framework for it - `Java` and `Spring Framework`.
