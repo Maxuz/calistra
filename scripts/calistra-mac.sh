@@ -26,8 +26,12 @@ SOURCE_DIR=$(pwd)
 WORK_DIR=$SOURCE_DIR/work_dir
 
 # Java variable
+# MacOs x64
+#JAVA_ARC_URL=https://github.com/adoptium/temurin17-binaries/releases/download/jdk-17.0.6%2B10/OpenJDK17U-jdk_x64_mac_hotspot_17.0.6_10.tar.gz
 
-JAVA_ARC_URL=https://github.com/adoptium/temurin17-binaries/releases/download/jdk-17.0.6%2B10/OpenJDK17U-jdk_x64_linux_hotspot_17.0.6_10.tar.gz
+# MacOs aarch64
+#JAVA_ARC_URL=https://github.com/adoptium/temurin17-binaries/releases/download/jdk-17.0.6%2B10/OpenJDK17U-jdk_aarch64_mac_hotspot_17.0.6_10.tar.gz
+
 JAVA_FILE_ARC="openjdk.tar.gz"
 JDK_DIR="$WORK_DIR/jdk-17.0.6+10"
 
@@ -120,6 +124,11 @@ run_gradle() {
   cd - 1>/dev/null || exit 1
 }
 
+if [ -z "$JAVA_ARC_URL" ]; then
+  echo "Please uncomment the JAVA_ARC_URL variable in the begging of the script"
+  exit 1
+fi
+
 # prepare working directory
 prepare_working_directory "$WORK_DIR"
 
@@ -150,9 +159,9 @@ declare -a TEST_RESULT
 
 for ((i = 0; i < 3; i++)); do
   echo "Starting test #$i"
-  START=$(($(date +%s%N) / 1000000))
+  START=$(date +%s)
   run_gradle "$SPRING_DIR" "$JDK_DIR" "$GRADLE_OPTS $PARALLEL_GRADLE_OPTS" "clean $GRADLE_TARGET_TASK"
-  EXEC_TIME=$((($(date +%s%N) / 1000000) - START))
+  EXEC_TIME=$(($(date +%s) - START))
   TEST_RESULT[$i]=$EXEC_TIME
   echo "Test #$i finished"
 done
@@ -162,7 +171,7 @@ echo "####################################################"
 echo ""
 echo "Test execution is completed. Results for each iteration:"
 for i in "${!TEST_RESULT[@]}"; do
-  echo "#$i: ${TEST_RESULT[$i]}ms"
+  echo "#$i: ${TEST_RESULT[$i]}s"
 done
 
 # Calculating average time
@@ -172,6 +181,6 @@ for i in "${TEST_RESULT[@]}"; do
   ((SUM += $i))
   ((TOTAL++))
 done
-echo "Average time is: $((SUM / TOTAL)) ms"
+echo "Average time is: $((SUM / TOTAL)) s"
 
 exit 0
